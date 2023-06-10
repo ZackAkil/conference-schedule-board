@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
 
     <style>
         div {
@@ -101,6 +104,7 @@
 
         .event_name {
             font-size: 1.5em;
+            font-weight: 600;
         }
 
         .time {
@@ -135,11 +139,10 @@
         }
 
         .status_box {
-            background-color: red;
             border: solid black 4px;
             border-right: 0;
             height: 121px;
-            width: 100px;
+            width: 160px;
             border-radius: 20px 0 0 20px;
 
             display: flex;
@@ -165,8 +168,16 @@
             background-color: #428fff;
         }
 
+        .over {
+            background-color: gray;
+        }
+
         .later {
             opacity: 0;
+        }
+
+        .material-symbols-outlined {
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -218,8 +229,14 @@
 
                         <div class="info">
                             <p class="event_name"> {{event.event_name}} </p>
-                            <p class="name"> {{event.profile.name}} - {{event.location}}</p>
-                            <p class="time"> {{event.start_time}} - {{event.end_time}}</p>
+                            <p class="name"><span class="material-symbols-outlined">
+                                    person
+                                </span> {{event.profile.name}} <span class="material-symbols-outlined">
+                                    location_on
+                                </span> {{event.location}}</p>
+                            <p class="time"><span class="material-symbols-outlined">
+                                    schedule
+                                </span> {{event.start_time}} - {{event.end_time}}</p>
                         </div>
                     </div>
                 </div>
@@ -249,9 +266,13 @@
                 return {
                     message: 'Hello Vue!',
                     events: [
+                        // {
+                        //     'profile': profiles['zack'], 'event_name': 'How to Have Winning AI Ideas: Demos and frameworks from an ML engineer who’s won in every hackathon they\'ve entered',
+                        //     'start_time': '16:50', 'end_time': '17:15', 'status': 'now', 'location': 'Headliners Stage'
+                        // },
                         {
                             'profile': profiles['zack'], 'event_name': 'How to Have Winning AI Ideas: Demos and frameworks from an ML engineer who’s won in every hackathon they\'ve entered',
-                            'start_time': '16:50', 'end_time': '17:15', 'status': 'now', 'location': 'Headliners Stage'
+                            'start_time': '16:50', 'end_time': '18:15', 'status': 'now', 'location': 'Headliners Stage'
                         },
                         {
                             'profile': profiles['polong'], 'event_name': 'Types of Data Configured for Businesses: Can Implementing Them Change Your Growth Opportunity?',
@@ -296,10 +317,17 @@
 
                 const start_mins_diff = calculateMinutesToTime(event.start_time)
                 event.mins_to_event = start_mins_diff
-
-
                 const end_mins_diff = calculateMinutesToTime(event.end_time)
-                event.is_over = (end_mins_diff <= 0)
+
+                if (end_mins_diff <= 0) {
+                    event.status = 'over'
+                } else if (start_mins_diff <= 5) {
+                    event.status = 'now'
+                } else if (start_mins_diff <= 45) {
+                    event.status = 'soon'
+                } else {
+                    event.status = 'future'
+                }
 
 
             })

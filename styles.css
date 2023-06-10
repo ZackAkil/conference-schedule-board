@@ -34,6 +34,12 @@ div {
 
 }
 
+.footer>h3 {
+    border: solid black 5px;
+    padding: 29px;
+    border-radius: 80px;
+}
+
 
 
 .video_header {
@@ -179,4 +185,15 @@ video {
 .event_container.finished {
     background-color: rgba(0, 0, 0, 0);
     opacity: 0.25;
+}
+
+.session-head>h1 {
+    display: inline-block;
+    color: rgb(84, 84, 84);
+    text-align: center;
+    border: solid black 5px;
+    padding: 22px;
+    border-radius: 50px;
+    margin: 0;
+    color: #428fff;
 }

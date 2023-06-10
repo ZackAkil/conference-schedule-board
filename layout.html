@@ -1,0 +1,270 @@
+<html>
+
+<head>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
+
+    <style>
+        div {
+            /* border: solid red 5px; */
+        }
+
+        .app {
+            display: flex;
+            flex-direction: column;
+            align-self: stretch;
+            width: 100%;
+            height: 100%;
+            border: 0;
+
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .top {
+            order: 0;
+            flex-grow: 1;
+            flex-shrink: 1;
+            align-self: stretch;
+
+            display: flex;
+
+
+        }
+
+        .footer {
+            flex-grow: 1;
+            align-self: stretch;
+        }
+
+        .video_header {
+            flex-grow: 1;
+            flex-shrink: 1;
+            align-self: stretch;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .schedule {
+            flex-grow: 1;
+            flex-shrink: 1;
+            align-self: stretch;
+        }
+
+        .header {
+            flex-grow: 1;
+            align-self: stretch;
+        }
+
+        .video {
+            flex-grow: 5;
+            align-self: stretch;
+        }
+
+        .event_container {
+            display: flex;
+        }
+
+        .event {
+            border: solid black 4px;
+            margin: 20px 20px 20px 0px;
+
+            border-radius: 30px;
+            background-color: rgb(255, 187, 1);
+            display: flex;
+            flex-grow: 5;
+            align-self: stretch;
+        }
+
+        .status {
+            flex-grow: 0;
+            align-self: center;
+        }
+
+        .event>.profile {
+            /* flex-grow: 2 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .name {
+            font-size: 2em;
+            margin: 5px 0 0 0;
+        }
+
+        .event_name {
+            font-size: 1.5em;
+        }
+
+        .event>.info {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .profile>img {
+            height: 150px;
+            border-radius: 50%;
+            border: black solid 4px;
+        }
+
+        video {
+            border-radius: 70px;
+            margin: 20px;
+        }
+
+
+        .flash {
+            animation: flasher 1.3s linear infinite;
+        }
+
+        @keyframes flasher {
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .status_box {
+            background-color: red;
+            border: solid black 4px;
+            border-right: 0;
+            height: 121px;
+            width: 100px;
+            border-radius: 20px 0 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-size: 1.4em;
+        }
+
+        .invisible {
+            opacity: 0;
+        }
+
+
+        .now {
+            background-color: #fe5145;
+        }
+
+        .soon {
+            background-color: #428fff;
+        }
+
+        .later {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="app" id="app">
+        <div class="top">
+
+            <div class="video_header">
+
+                <div class="header">
+                    <img src="Google-Cloud-Logo.png" style="height:100px; margin:50px;"></img>
+
+                </div>
+
+                <div class="video">
+
+                    <video src="Leading companies build with generative AI on Google Cloud.mp4" autoplay loop
+                        muted></video>
+
+                </div>
+
+            </div>
+
+
+            <div class="schedule">
+
+                <h3>Google Cloud Sessions... </h3>
+
+
+                <div class="event_container" v-for="event in events">
+
+                    <div class="status">
+
+                        <div :class="[event.status]" class="status_box">
+                            <p>{{event.status}}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="event" :class="{flash: event.status == 'now'}">
+
+                        <div class="profile">
+                            <img :src="event.profile.profile_img">
+                        </div>
+
+                        <div class="info">
+                            <p class="name"> {{event.profile.name}} </p>
+                            <p class="event_name"> {{event.event_name}} </p>
+                            <p> {{event.start_time}} - {{event.end_time}} </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="footer">
+            <h3> Come to our QS3 Suite to talk to our experts and see our live demos</h3>
+
+        </div>
+    </div>
+
+
+
+    <script>
+        const profiles = {
+            'zack': { 'name': 'Zack Akil', 'profile_img': 'profiles/zack.webp' },
+            'polong': { 'name': 'Polong Lin', 'profile_img': 'profiles/polong.webp' },
+            'ivan': { 'name': 'Ivan Nardini', 'profile_img': 'profiles/ivan.webp' }
+        }
+
+        const { createApp } = Vue
+
+        const app = createApp({
+            data() {
+                return {
+                    message: 'Hello Vue!',
+                    events: [
+                        {
+                            'profile': profiles['zack'], 'event_name': 'How to Have Winning AI Ideas: Demos and frameworks from an ML engineer who’s won in every hackathon they\'ve entered',
+                            'start_time': '16:50', 'end_time': '17:15', 'status': 'now'
+                        },
+                        {
+                            'profile': profiles['polong'], 'event_name': 'Types of Data Configured for Businesses: Can Implementing Them Change Your Growth Opportunity?',
+                            'start_time': '16:10', 'end_time': '16:50', 'status': 'soon'
+                        },
+                        {
+                            'profile': profiles['ivan'], 'event_name': 'How to Embrace This Wave of Innovation',
+                            'start_time': '10:00', 'end_time': '10:25', 'status': 'later'
+                        },
+                        {
+                            'profile': profiles['ivan'], 'event_name': 'Using AI to Reshape the Future of Retail',
+                            'start_time': '11:15', 'end_time': '11:40', 'status': 'later'
+                        }
+                    ]
+                }
+            }
+        }).mount('#app')
+    </script>
+
+
+</body>
+
+</html>

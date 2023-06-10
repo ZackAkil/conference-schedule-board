@@ -1,0 +1,186 @@
+<!doctype html>
+
+<head>
+    <title>Example</title>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+            margin: 0;
+
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #main {
+            display: flex;
+            flex: 1;
+        }
+
+        #main>article {
+            flex: 1;
+        }
+
+        #main>nav,
+        #main>aside {
+            flex: 0 0 30vw;
+            background: beige;
+        }
+
+        #main>nav {
+            order: -1;
+        }
+
+        header,
+        footer {
+            background: rgb(229, 229, 229);
+            height: 20vh;
+        }
+
+        header,
+        footer,
+        article,
+        nav,
+        aside {
+            padding: 1em;
+        }
+
+        .event {
+            border: solid black 4px;
+            margin: 20px;
+            display: flex;
+
+            border-radius: 30px;
+            background-color: rgb(255, 187, 1);
+
+        }
+
+        .event>.profile {
+            /* flex-grow: 2 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .name {
+            font-size: 2em;
+            margin: 5px 0 0 0;
+        }
+
+        .event>.info {
+            flex: 1;
+        }
+
+        .profile>img {
+            height: 100px;
+            border-radius: 50%;
+            border: black solid 4px;
+        }
+
+        video {
+            border-radius: 70px;
+        }
+    </style>
+
+
+</head>
+
+
+<body>
+    <div id="app">
+        <header>
+            <img src="Google-Cloud-Logo.png" style="height:200px"></img>
+        </header>
+        <div id="main">
+            <article>
+                <video src="Leading companies build with generative AI on Google Cloud.mp4" autoplay loop muted></video>
+            </article>
+            <aside>
+
+                <div id="events">
+
+                    <h2>Upcoming sessions...</h2>
+
+
+
+                    <div v-for="event in events">
+
+                        <div class="status">
+
+                            {{event.status}}
+
+                        </div>
+
+                        <div class="event">
+
+                            <div class="profile">
+                                <img :src="event.profile.profile_img">
+                            </div>
+
+                            <div class="info">
+                                <p class="name"> {{event.profile.name}} </p>
+                                <p> {{event.event_name}} </p>
+                                <p> {{event.start_time}} - {{event.end_time}} </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </aside>
+        </div>
+        <footer>
+            <h3> Come to our QS3 Suite to talk to our experts and see our live demos</h3>
+        </footer>
+    </div>
+
+    <script>
+        const profiles = {
+            'zack': { 'name': 'Zack Akil', 'profile_img': 'profiles/zack.webp' },
+            'polong': { 'name': 'Polong Lin', 'profile_img': 'profiles/polong.webp' },
+            'ivan': { 'name': 'Ivan Nardini', 'profile_img': 'profiles/ivan.webp' }
+        }
+
+        const { createApp } = Vue
+
+        const app = createApp({
+            data() {
+                return {
+                    message: 'Hello Vue!',
+                    events: [
+                        {
+                            'profile': profiles['zack'], 'event_name': 'How to Have Winning AI Ideas: Demos and frameworks from an ML engineer who’s won in every hackathon they\'ve entered',
+                            'start_time': '16:50', 'end_time': '17:15', 'status': 'happening'
+                        },
+                        {
+                            'profile': profiles['polong'], 'event_name': 'Types of Data Configured for Businesses: Can Implementing Them Change Your Growth Opportunity?',
+                            'start_time': '16:10', 'end_time': '16:50', 'status': 'happening_soon'
+                        },
+                        {
+                            'profile': profiles['ivan'], 'event_name': 'How to Embrace This Wave of Innovation',
+                            'start_time': '10:00', 'end_time': '10:25', 'status': 'future'
+                        },
+                        {
+                            'profile': profiles['ivan'], 'event_name': 'Using AI to Reshape the Future of Retail',
+                            'start_time': '11:15', 'end_time': '11:40', 'status': 'future'
+                        }
+                    ]
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>

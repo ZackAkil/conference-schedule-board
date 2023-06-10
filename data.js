@@ -10,7 +10,7 @@ const events = [
     //     'start_time': '16:50', 'end_time': '17:15', 'status': 'now', 'location': 'Headliners Stage'
     // },
     {
-        'profile': profiles['zack'], 'event_name': 'How to Have Winning AI Ideas: Demos and frameworks from an ML engineer who’s won in every hackathon they\'ve entered',
+        'profile': profiles['zack'], 'event_name': 'How to Have Winning AI Ideas: Demos and frameworks from an ML engineer who\'s won in every hackathon they\'ve entered',
         'start_time': '16:50', 'end_time': '18:15', 'status': 'now', 'location': 'Headliners Stage', 'type': 'Keynote'
     },
     {

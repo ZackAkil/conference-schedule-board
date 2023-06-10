@@ -1,0 +1,182 @@
+div {
+    /* border: solid red 5px; */
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+    border: 0;
+
+    font-family: 'Open Sans', sans-serif;
+}
+
+.top {
+    order: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    align-self: stretch;
+
+    display: flex;
+}
+
+.footer {
+    flex-grow: 1;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2em;
+    color: #545454;
+
+}
+
+
+
+.video_header {
+    flex-grow: 1;
+    flex-shrink: 1;
+    align-self: stretch;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule {
+    flex-grow: 1;
+    flex-shrink: 1;
+    align-self: stretch;
+}
+
+.header {
+    flex-grow: 1;
+    align-self: stretch;
+}
+
+.video {
+    flex-grow: 5;
+    align-self: stretch;
+}
+
+.event_container {
+    display: flex;
+}
+
+.event {
+    border: solid black 4px;
+    margin: 20px 20px 20px 0px;
+
+    border-radius: 30px;
+    background-color: rgb(255, 187, 1);
+    display: flex;
+    flex-grow: 5;
+    align-self: stretch;
+}
+
+.status {
+    flex-grow: 0;
+    align-self: center;
+}
+
+.event>.profile {
+    /* flex-grow: 2 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+
+.name {
+    font-size: 1.6em;
+    margin: 5px 0 0 0;
+}
+
+.event_name {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.time {
+    font-size: 1.5em;
+}
+
+.event>.info {
+    flex: 1;
+    padding: 10px;
+}
+
+.profile>img {
+    height: 150px;
+    border-radius: 50%;
+    border: black solid 4px;
+}
+
+video {
+    border-radius: 70px;
+    margin: 20px;
+}
+
+
+.flash {
+    animation: flasher 1.3s linear infinite;
+}
+
+@keyframes flasher {
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.status_box {
+    border: solid black 4px;
+    border-right: 0;
+    height: 121px;
+    width: 160px;
+    border-radius: 20px 0 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-size: 1.4em;
+
+    text-align: center;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+
+.now {
+    background-color: #fe5145;
+}
+
+.soon {
+    background-color: #428fff;
+}
+
+.google_blue {
+    color: #428fff;
+}
+
+.finished {
+    background-color: gray;
+}
+
+.later {
+    background-color: #38a852;
+}
+
+.material-symbols-outlined {
+    vertical-align: middle;
+}
+
+.event_container.finished {
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0.25;
+}

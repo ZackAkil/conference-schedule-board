@@ -2,7 +2,10 @@
 
 <head>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,179 +15,9 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
 
-    <style>
-        div {
-            /* border: solid red 5px; */
-        }
+    <link rel="stylesheet" href="styles.css">
 
-        .app {
-            display: flex;
-            flex-direction: column;
-            align-self: stretch;
-            width: 100%;
-            height: 100%;
-            border: 0;
-
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        .top {
-            order: 0;
-            flex-grow: 1;
-            flex-shrink: 1;
-            align-self: stretch;
-
-            display: flex;
-
-
-        }
-
-        .footer {
-            flex-grow: 1;
-            align-self: stretch;
-        }
-
-        .video_header {
-            flex-grow: 1;
-            flex-shrink: 1;
-            align-self: stretch;
-
-            display: flex;
-            flex-direction: column;
-        }
-
-        .schedule {
-            flex-grow: 1;
-            flex-shrink: 1;
-            align-self: stretch;
-        }
-
-        .header {
-            flex-grow: 1;
-            align-self: stretch;
-        }
-
-        .video {
-            flex-grow: 5;
-            align-self: stretch;
-        }
-
-        .event_container {
-            display: flex;
-        }
-
-        .event {
-            border: solid black 4px;
-            margin: 20px 20px 20px 0px;
-
-            border-radius: 30px;
-            background-color: rgb(255, 187, 1);
-            display: flex;
-            flex-grow: 5;
-            align-self: stretch;
-        }
-
-        .status {
-            flex-grow: 0;
-            align-self: center;
-        }
-
-        .event>.profile {
-            /* flex-grow: 2 */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 10px;
-        }
-
-        .name {
-            font-size: 1.6em;
-            margin: 5px 0 0 0;
-        }
-
-        .event_name {
-            font-size: 1.5em;
-            font-weight: 600;
-        }
-
-        .time {
-            font-size: 1.5em;
-        }
-
-        .event>.info {
-            flex: 1;
-            padding: 10px;
-        }
-
-        .profile>img {
-            height: 150px;
-            border-radius: 50%;
-            border: black solid 4px;
-        }
-
-        video {
-            border-radius: 70px;
-            margin: 20px;
-        }
-
-
-        .flash {
-            animation: flasher 1.3s linear infinite;
-        }
-
-        @keyframes flasher {
-            50% {
-                opacity: 0.5;
-            }
-        }
-
-        .status_box {
-            border: solid black 4px;
-            border-right: 0;
-            height: 121px;
-            width: 160px;
-            border-radius: 20px 0 0 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            color: white;
-            font-size: 1.4em;
-
-            text-align: center;
-        }
-
-        .invisible {
-            opacity: 0;
-        }
-
-
-        .now {
-            background-color: #fe5145;
-        }
-
-        .soon {
-            background-color: #428fff;
-        }
-
-        .finished {
-            background-color: gray;
-        }
-
-        .later {
-            background-color: #38a852;
-        }
-
-        .material-symbols-outlined {
-            vertical-align: middle;
-        }
-
-        .event_container.finished {
-            background-color: rgba(0, 0, 0, 0);
-            opacity: 0.25;
-        }
-    </style>
+    <script src="data.js"></script>
 </head>
 
 <body>
@@ -212,7 +45,7 @@
 
             <div class="schedule">
 
-                <h1>Sessions to see... </h1>
+                <h1 style="color: #545454; text-align: center;">Sessions to check out... </h1>
 
 
                 <div class="event_container" v-for="event in sorted_events"
@@ -257,7 +90,8 @@
 
         </div>
         <div class="footer">
-            <h3> Come to our QS3 Suite to talk to our experts and see our live demos</h3>
+            <h3> Come to our suite to <span class="google_blue">talk to our experts</span> and see our <span
+                    class="google_blue">live demos</span>.</h3>
 
         </div>
     </div>
@@ -265,44 +99,15 @@
 
 
     <script>
-        const profiles = {
-            'zack': { 'name': 'Zack Akil', 'profile_img': 'profiles/zack.webp' },
-            'polong': { 'name': 'Polong Lin', 'profile_img': 'profiles/polong.webp' },
-            'ivan': { 'name': 'Ivan Nardini', 'profile_img': 'profiles/ivan.webp' }
-        }
+
+
 
         const { createApp } = Vue
 
         const app = createApp({
             data() {
                 return {
-                    message: 'Hello Vue!',
-                    events: [
-                        // {
-                        //     'profile': profiles['zack'], 'event_name': 'How to Have Winning AI Ideas: Demos and frameworks from an ML engineer who’s won in every hackathon they\'ve entered',
-                        //     'start_time': '16:50', 'end_time': '17:15', 'status': 'now', 'location': 'Headliners Stage'
-                        // },
-                        {
-                            'profile': profiles['zack'], 'event_name': 'How to Have Winning AI Ideas: Demos and frameworks from an ML engineer who’s won in every hackathon they\'ve entered',
-                            'start_time': '16:50', 'end_time': '18:15', 'status': 'now', 'location': 'Headliners Stage', 'type': 'Keynote'
-                        },
-                        {
-                            'profile': profiles['polong'], 'event_name': 'Types of Data Configured for Businesses: Can Implementing Them Change Your Growth Opportunity?',
-                            'start_time': '18:10', 'end_time': '18:50', 'status': 'soon', 'location': 'Next Generation Applications Stage', 'type': 'Panel'
-                        },
-                        // {
-                        //     'profile': profiles['polong'], 'event_name': 'Types of Data Configured for Businesses: Can Implementing Them Change Your Growth Opportunity?',
-                        //     'start_time': '16:10', 'end_time': '16:50', 'status': 'soon', 'location': 'Next Generation Applications Stage'
-                        // },
-                        {
-                            'profile': profiles['ivan'], 'event_name': 'How to Embrace This Wave of Innovation',
-                            'start_time': '19:30', 'end_time': '19:25', 'status': 'later', 'location': 'AI at Scale Stage', 'type': 'Panel'
-                        },
-                        {
-                            'profile': profiles['ivan'], 'event_name': 'Using AI to Reshape the Future of Retail',
-                            'start_time': '18:35', 'end_time': '18:40', 'status': 'later', 'location': 'Industries Stage', 'type': 'Talk'
-                        }
-                    ]
+                    events: events
                 }
             },
             computed: {

@@ -168,16 +168,21 @@
             background-color: #428fff;
         }
 
-        .over {
+        .finished {
             background-color: gray;
         }
 
         .later {
-            opacity: 0;
+            background-color: #38a852;
         }
 
         .material-symbols-outlined {
             vertical-align: middle;
+        }
+
+        .event_container.finished {
+            background-color: rgba(0, 0, 0, 0);
+            opacity: 0.25;
         }
     </style>
 </head>
@@ -210,7 +215,8 @@
                 <h1>Sessions to see... </h1>
 
 
-                <div class="event_container" v-for="event in events">
+                <div class="event_container" v-for="event in sorted_events"
+                    :class="{finished:event.status=='finished'}">
 
                     <div class="status">
 
@@ -231,12 +237,18 @@
                             <p class="event_name"> {{event.event_name}} </p>
                             <p class="name"><span class="material-symbols-outlined">
                                     person
-                                </span> {{event.profile.name}} <span class="material-symbols-outlined">
+                                </span> {{event.profile.name}} &nbsp&nbsp
+                                <span class="material-symbols-outlined">
                                     location_on
-                                </span> {{event.location}}</p>
+                                </span> {{event.location}}
+                            </p>
                             <p class="time"><span class="material-symbols-outlined">
+                                    festival
+                                </span> {{event.type}} &nbsp&nbsp
+                                <span class="material-symbols-outlined">
                                     schedule
-                                </span> {{event.start_time}} - {{event.end_time}}</p>
+                                </span> {{event.start_time}} - {{event.end_time}}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -272,11 +284,11 @@
                         // },
                         {
                             'profile': profiles['zack'], 'event_name': 'How to Have Winning AI Ideas: Demos and frameworks from an ML engineer who’s won in every hackathon they\'ve entered',
-                            'start_time': '16:50', 'end_time': '18:15', 'status': 'now', 'location': 'Headliners Stage'
+                            'start_time': '16:50', 'end_time': '18:15', 'status': 'now', 'location': 'Headliners Stage', 'type': 'Keynote'
                         },
                         {
                             'profile': profiles['polong'], 'event_name': 'Types of Data Configured for Businesses: Can Implementing Them Change Your Growth Opportunity?',
-                            'start_time': '18:10', 'end_time': '18:50', 'status': 'soon', 'location': 'Next Generation Applications Stage'
+                            'start_time': '18:10', 'end_time': '18:50', 'status': 'soon', 'location': 'Next Generation Applications Stage', 'type': 'Panel'
                         },
                         // {
                         //     'profile': profiles['polong'], 'event_name': 'Types of Data Configured for Businesses: Can Implementing Them Change Your Growth Opportunity?',
@@ -284,16 +296,38 @@
                         // },
                         {
                             'profile': profiles['ivan'], 'event_name': 'How to Embrace This Wave of Innovation',
-                            'start_time': '10:00', 'end_time': '10:25', 'status': 'later', 'location': 'AI at Scale Stage'
+                            'start_time': '19:30', 'end_time': '19:25', 'status': 'later', 'location': 'AI at Scale Stage', 'type': 'Panel'
                         },
                         {
                             'profile': profiles['ivan'], 'event_name': 'Using AI to Reshape the Future of Retail',
-                            'start_time': '11:15', 'end_time': '11:40', 'status': 'later', 'location': 'Industries Stage'
+                            'start_time': '18:35', 'end_time': '18:40', 'status': 'later', 'location': 'Industries Stage', 'type': 'Talk'
                         }
                     ]
                 }
+            },
+            computed: {
+                sorted_events() {
+                    console.log(this.events)
+                    return [...this.events].sort(compareStartTime);
+                }
             }
         }).mount('#app')
+
+
+        // Custom comparator function
+        function compareStartTime(a, b) {
+            const timeA = new Date();
+            const [hoursA, minutesA] = a.start_time.split(':');
+            timeA.setHours(hoursA);
+            timeA.setMinutes(minutesA);
+
+            const timeB = new Date();
+            const [hoursB, minutesB] = b.start_time.split(':');
+            timeB.setHours(hoursB);
+            timeB.setMinutes(minutesB);
+
+            return timeA - timeB;
+        }
 
 
         function calculateMinutesToTime(localTime) {
@@ -320,13 +354,13 @@
                 const end_mins_diff = calculateMinutesToTime(event.end_time)
 
                 if (end_mins_diff <= 0) {
-                    event.status = 'over'
+                    event.status = 'finished'
                 } else if (start_mins_diff <= 5) {
                     event.status = 'now'
-                } else if (start_mins_diff <= 45) {
+                } else if (start_mins_diff < 60) {
                     event.status = 'soon'
                 } else {
-                    event.status = 'future'
+                    event.status = 'later'
                 }
 
 

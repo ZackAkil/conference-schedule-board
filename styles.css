@@ -69,12 +69,11 @@ div {
 
 .event_container {
     display: flex;
+    margin: 25px;
 }
 
 .event {
     border: solid black 4px;
-    margin: 20px 20px 20px 0px;
-
     border-radius: 30px;
     background-color: rgb(255, 187, 1);
     display: flex;
@@ -123,6 +122,10 @@ div {
 video {
     border-radius: 70px;
     margin: 20px;
+}
+
+.video {
+    text-align: center;
 }
 
 
@@ -194,6 +197,17 @@ video {
     border: solid black 5px;
     padding: 22px;
     border-radius: 50px;
-    margin: 0;
+    margin: 25px;
+    margin-bottom: 0;
     color: #428fff;
+}
+
+.pill {
+    display: inline-block;
+    color: rgb(84, 84, 84);
+    text-align: center;
+    border: solid black 5px;
+    padding: 22px;
+    border-radius: 50px;
+    margin: 0;
 }

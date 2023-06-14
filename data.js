@@ -21,8 +21,8 @@ const events = [
     {
         'profile': profiles['polong'],
         'event_name': 'Types of Data Configured for Businesses: Can Implementing Them Change Your Growth Opportunity?',
-        'start_time': '18:10',
-        'end_time': '18:50',
+        'start_time': '16:10',
+        'end_time': '16:50',
         'status': 'soon',
         'location': 'Next Generation Applications Stage',
         'type': 'Panel'

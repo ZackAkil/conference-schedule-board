@@ -34,6 +34,7 @@ div {
     border: solid black 5px;
     padding: 29px;
     border-radius: 80px;
+    font-size:2em;
 }
 
 .video_header {
